@@ -1,7 +1,6 @@
 import Avatar from "@components/Avatar";
 import ExternalLink from "@components/ExternalLink";
 import { prisma } from "@lib/prisma";
-import { FaLinkedin, FaGithub } from "react-icons/fa";
 import { GetStaticPaths, GetStaticProps } from "next";
 import { User } from "@prisma/client";
 import Timeline from "@components/Timeline";
