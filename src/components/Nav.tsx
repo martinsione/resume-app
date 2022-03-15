@@ -9,9 +9,10 @@ import Avatar from "./Avatar";
 import Signin from "./LoginPopup";
 
 interface Props {
-  src: string;
   alt: string;
-  userId: string | null;
+  isLogged: boolean;
+  src: string;
+  username: string | null;
 }
 
 const NAV_LINKS = [
@@ -19,7 +20,7 @@ const NAV_LINKS = [
   { href: "/jobs", label: "Jobs" },
 ];
 
-export default function Nav({ alt, src, userId }: Props) {
+export default function Nav({ alt, isLogged, src, username }: Props) {
   const { asPath: pathname } = useRouter();
   return (
     <div className="border-b border-zinc-200">
@@ -41,7 +42,7 @@ export default function Nav({ alt, src, userId }: Props) {
           ))}
         </div>
 
-        {userId ? (
+        {username ? (
           <Menu as="div" className="relative ml-3">
             <Menu.Button className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300">
               <Avatar alt={alt} size="48px" src={src} />
@@ -57,7 +58,7 @@ export default function Nav({ alt, src, userId }: Props) {
             >
               <Menu.Items className="absolute right-0 mt-2 w-48 rounded-md bg-white py-1 shadow-lg">
                 <Menu.Item>
-                  <Link href={`/${userId}`}>
+                  <Link href={`/${username}`}>
                     <a className="flex w-full items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                       <HiOutlineUserCircle className="text-lg" /> View profile
                     </a>

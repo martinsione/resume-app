@@ -74,16 +74,16 @@ export default function Profile({ user }: Props) {
 export const getStaticPaths: GetStaticPaths = async () => {
   const users = await prisma.user.findMany();
   return {
-    paths: users.map((user) => ({ params: { userId: user.id } })),
+    paths: users.map((user) => ({ params: { username: user.username } })),
     fallback: false,
   };
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   try {
-    if (params?.userId) {
-      const userId = params.userId.toString();
-      const user = await prisma.user.findUnique({ where: { id: userId } });
+    if (params?.username) {
+      const username = params.username.toString();
+      const user = await prisma.user.findUnique({ where: { username } });
       return { props: { user } };
     }
     return { props: { user: null, success: true } };

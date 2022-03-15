@@ -5,22 +5,24 @@ import { getSession } from "next-auth/react";
 
 interface Props {
   user: User | null;
-  userId: string | null;
 }
 
-export default function Home({ user, userId }: Props) {
+export default function Home({ user }: Props) {
+  const isLogged = !!user?.id;
   return (
     <div>
-      <Nav alt={user?.name || ""} src={user?.image || ""} userId={userId} />
+      <Nav
+        alt={user?.name || ""}
+        isLogged={isLogged}
+        src={user?.image || ""}
+        username={user?.username || null}
+      />
     </div>
   );
 }
 
 export const getServerSideProps: GetServerSideProps = async (ctx: GetServerSidePropsContext) => {
   const session = await getSession(ctx);
-  if (!session) {
-    return { props: { user: null, userId: null } };
-  }
-  const { user, userId } = session;
-  return { props: { user, userId } };
+  if (!session) return { props: { user: null } };
+  return { props: { user: session.user } };
 };
