@@ -2,17 +2,15 @@ import Image, { ImageProps } from "next/image";
 import cl from "@lib/cl";
 
 interface Props {
-  className?: string;
+  size: string;
 }
 
 export default function Avatar(props: Props & ImageProps) {
-  const { className, alt, src, ...ImageProps } = props;
+  const { size, alt, src, ...ImageProps } = props;
   return (
     <div
-      className={cl(
-        "relative h-20 w-20 overflow-hidden rounded-full transition duration-500 sm:h-24 sm:w-24",
-        className ? className : ""
-      )}
+      className={cl("relative overflow-hidden rounded-full transition duration-500")}
+      style={{ width: size, height: size }}
     >
       <Image alt={alt} layout="fill" src={src} {...ImageProps} />
     </div>

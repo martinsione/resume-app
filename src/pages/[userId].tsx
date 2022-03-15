@@ -14,7 +14,7 @@ export default function Profile({ user }: Props) {
     <div className="mx-auto flex max-w-2xl flex-col gap-10 px-6 py-6 sm:py-12">
       <div className="flex items-center gap-4">
         <div>
-          <Avatar alt={user.name || ""} src={user.image || ""} />
+          <Avatar alt={user.name || ""} size="92px" src={user.image || ""} />
         </div>
         <div>
           <h2 className="sm:text-xl">{user.name}</h2>
