@@ -1,8 +1,55 @@
+/* 
+
+npm i -D -E \
+  eslint eslint-config-prettier prettier \
+  eslint-config-airbnb eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-react eslint-plugin-react-hooks \
+  eslint-config-airbnb-typescript @typescript-eslint/eslint-plugin @typescript-eslint/parser 
+
+*/
 {
-  "extends": ["next", "next/core-web-vitals", "prettier"],
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "node": true
+  },
+  "extends": ["next", "next/core-web-vitals", "airbnb", "airbnb-typescript", "prettier"],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
   "rules": {
-    "no-console": "warn",
-    "react/self-closing-comp": "warn",
+    // Workaround for next/link to work https://github.com/jsx-eslint/eslint-plugin-jsx-a11y/issues/402
+    "no-param-reassign": "off",
+    "jsx-a11y/anchor-is-valid": [
+      "error",
+      {
+        "components": ["Link"],
+        "specialLink": ["hrefLeft", "hrefRight"],
+        "aspects": ["invalidHref", "preferButton"]
+      }
+    ],
+    "import/order": [
+      "warn",
+      {
+        "alphabetize": {
+          "order": "desc",
+          "caseInsensitive": false
+        },
+        "groups": [
+          "type",
+          "builtin",
+          "object",
+          "external",
+          "internal",
+          "parent",
+          "sibling",
+          "index"
+        ],
+        "pathGroups": [{ "pattern": "@/**", "group": "external", "position": "after" }],
+        "newlines-between": "always"
+      }
+    ],
+    "react/jsx-props-no-spreading": "off",
     "react/jsx-sort-props": [
       "warn",
       {
@@ -11,6 +58,8 @@
         "noSortAlphabetically": false,
         "reservedFirst": true
       }
-    ]
+    ],
+    "react/react-in-jsx-scope": "off",
+    "react/require-default-props": "off"
   }
 }

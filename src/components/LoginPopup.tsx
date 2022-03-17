@@ -1,8 +1,8 @@
-import { signIn } from "next-auth/react";
-import { Dialog, Transition } from "@headlessui/react";
-import { Fragment, useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
+import { Fragment, useState } from "react";
+import { signIn } from "next-auth/react";
+import { Dialog, Transition } from "@headlessui/react";
 
 export default function LoginPopup() {
   const [isOpen, setIsOpen] = useState(false);
@@ -56,6 +56,7 @@ export default function LoginPopup() {
                 <div className="flex flex-col gap-2">
                   <button
                     className="flex items-center justify-center gap-2 rounded-lg border border-zinc-200 py-2 px-4 hover:shadow"
+                    type="button"
                     onClick={() => signIn("google")}
                   >
                     <FcGoogle className="text-xl" />
@@ -64,6 +65,7 @@ export default function LoginPopup() {
 
                   <button
                     className="flex items-center justify-center gap-2 rounded-lg border border-zinc-200 py-2 px-4 hover:shadow"
+                    type="button"
                     onClick={() => signIn("github")}
                   >
                     <FaGithub className="text-xl" />

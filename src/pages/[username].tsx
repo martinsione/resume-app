@@ -1,9 +1,10 @@
-import Avatar from "@components/Avatar";
-import ExternalLink from "@components/ExternalLink";
-import { prisma } from "@lib/prisma";
 import { GetStaticPaths, GetStaticProps } from "next";
 import { User } from "@prisma/client";
+
+import prisma from "@lib/prisma";
 import Timeline from "@components/Timeline";
+import ExternalLink from "@components/ExternalLink";
+import Avatar from "@components/Avatar";
 
 interface Props {
   user: User;

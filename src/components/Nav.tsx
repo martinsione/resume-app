@@ -1,16 +1,17 @@
-import { useRouter } from "next/router";
 import { HiOutlineLogout, HiOutlineUserCircle } from "react-icons/hi";
-import { Menu, Transition } from "@headlessui/react";
 import { Fragment } from "react";
-import { signOut } from "next-auth/react";
+import { useRouter } from "next/router";
 import Link from "next/link";
+import { signOut } from "next-auth/react";
+import { Menu, Transition } from "@headlessui/react";
+
 import cl from "@lib/cl";
-import Avatar from "./Avatar";
+
 import Signin from "./LoginPopup";
+import Avatar from "./Avatar";
 
 interface Props {
   alt: string;
-  isLogged: boolean;
   src: string;
   username: string | null;
 }
@@ -20,7 +21,7 @@ const NAV_LINKS = [
   { href: "/jobs", label: "Jobs" },
 ];
 
-export default function Nav({ alt, isLogged, src, username }: Props) {
+export default function Nav({ alt, src, username }: Props) {
   const { asPath: pathname } = useRouter();
   return (
     <div className="border-b border-zinc-200">
@@ -33,7 +34,7 @@ export default function Nav({ alt, isLogged, src, username }: Props) {
                   pathname === link.href
                     ? "font-semibold text-gray-800 dark:text-gray-200"
                     : "font-normal text-gray-600 dark:text-gray-400",
-                  "rounded-lg p-1 transition-all hover:bg-gray-200 dark:hover:bg-gray-800 sm:px-3 sm:py-2"
+                  "rounded-lg p-1 transition-all hover:bg-gray-200 dark:hover:bg-gray-800 sm:px-3 sm:py-2",
                 )}
               >
                 {link.label}
@@ -67,6 +68,7 @@ export default function Nav({ alt, isLogged, src, username }: Props) {
                 <Menu.Item>
                   <button
                     className="flex w-full items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    type="button"
                     onClick={() => signOut()}
                   >
                     <HiOutlineLogout className="text-lg" /> Logout
