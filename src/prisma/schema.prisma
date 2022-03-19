@@ -44,6 +44,12 @@ model User {
   username      String    @unique @default(uuid())
   email         String?   @unique
   emailVerified DateTime?
+  phone         String?   @unique
+  occupation    String?   
+  bio           String?   @db.VarChar(560)
+  portfolio     String?
+  github        String?   @unique
+  linkedin      String?   @unique
   image         String?
   accounts      Account[]
   sessions      Session[]

@@ -1,3 +1,5 @@
+import type { Session } from "./types";
+
 import GoogleProvider from "next-auth/providers/google";
 import GithubProvider from "next-auth/providers/github";
 import NextAuth from "next-auth";
@@ -20,11 +22,13 @@ export default NextAuth({
     }),
   ],
   callbacks: {
-    session: async ({ session, user }) => {
-      session.user = user;
-      return Promise.resolve(session);
+    // @ts-ignore
+    session: async ({ session, user }: { session: Session; user: User }) => {
+      session.user = { name: user.name, image: user.image, username: user.username };
+      return session;
     },
   },
+
   events: {
     createUser: async ({ user }) => {
       if (user.name) {
